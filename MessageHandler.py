@@ -1,22 +1,22 @@
 def handle_message(message, nickname="user"):
-	A = message.split(' ')
+	mtxt = message.split(' ')
 	answer = ''
-	if len(A) != 2:
-		answer = 'Remember, the message must look like that: "<day> <grade_number>", with all letters typed low-case'
+	if len(mtxt) != 2:
+		answer = 'Remember, the message must look like that: "<day> <grade_number>"'
 	else:
 		try:
-			gr = A[1]
-			if gr > 11 or gr < 5:
+			grade = A[1]
+			if int(grade) > 11 or int(grade) < 5:
 				answer
 		except:
-			answer = 'Remember, the message must look like that: "<day> <grade_number>", with all letters typed low-case'
+			answer = 'Remember, the message must look like that: "<day> <grade_number>"'
 		if answer == '':
-			wd = A[0]
-			ad = wd + '/' + gr + '.txt'
-			Tab = open(ad, 'r')
+			weekday = mtxt[0]
+			ansday = weekday.lower() + '/' + grade + '.txt'
+			Tab = open(ansday, 'r')
     		answer = Tab.readlines()
     		if answer == '':
-    			answer = "Looks like you're free on" + '' + wd + '!' + " (or the bot doesn't have the information about that grade/day" + ').'
+    			answer = "Looks like you're free on" + '' + weekday + '!' + " (or the bot doesn't have the information about that grade/day" + ').'
 
     return answer
 
