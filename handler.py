@@ -1,22 +1,37 @@
+from datetime import *
 def handle_message(message, nickname="user"):
-	mtxt = message.split(' ')
+	mtxt = message
 	answer = ''
-	if len(mtxt) != 2:
-		answer = 'Remember, the message must look like that: "<day> <grade_number>"'
+	t = 0
+	userlist = open("users.txt", 'r')
+	uscheck = userlist.readlines()
+	userlist.close()
+	grd = open("grades.txt", 'r')
+	grades = grd.readlines()
+	grd.close()
+	Week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+	if nickname not in uscheck:
+		if 3 > len(message) > 0 and "9" >= message[0] >= "0":
+			usernew = open("users.txt", 'w')
+			print(nickname, file=usernew)
+			usernew.close()
+			gradenew = open("grades.txt", 'w')
+			print(mtxt, file=gradenew)
+			gradenew.close()
+		else:
+			answer = 'Please input your grade number.'
 	else:
-		try:
-			grade = A[1]
-			if int(grade) > 11 or int(grade) < 5:
-				answer
-		except:
-			answer = 'Remember, the message must look like that: "<day> <grade_number>"'
-		if answer == '':
-			weekday = mtxt[0]
-			ansday = weekday.lower() + '/' + grade + '.txt'
-			Tab = open(ansday, 'r')
-    		answer = Tab.readlines()
-    		if answer == '':
-    			answer = "Looks like you're free on" + '' + weekday + '!' + " (or the bot doesn't have the information about that grade/day" + ').'
+		usnumber = uscheck.find(nickname)
+		grade = grades[usnumber]
+		if mtxt.lower in Week:
+			day = mtxt.lower
+		else:
+			day = date.today().weekday()
+			day = Week[day]
+		path = grade + '/' + day + '.txt'
+		schedule = open(path, 'w')
+		answer = schedule.readlines()
+		schedule.close()
 
     return answer
 
