@@ -31,6 +31,8 @@ def handle_message(message, nickname="user"):
 		path = grade + '/' + day + '.txt'
 		schedule = open(path, 'w')
 		answer = schedule.readlines()
+		if answer = '':
+			answer = "You either have no lessons tomorrow or we don't have information about them."
 		schedule.close()
 
     return answer
