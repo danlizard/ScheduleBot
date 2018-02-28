@@ -15,5 +15,4 @@ while True:
 		nick = str(el["message"]["from"]["id"]) + "\n"
 		chat_id = el["message"]["from"]["id"]
 		ans = handle_message(text, nick)
-		for i in range(0, len(ans)):
-			requests.post(token + "sendMessage", params={"chat_id": chat_id, "text": ans[i]})
+		requests.post(token + "sendMessage", params={"chat_id": chat_id, "text": ans[i]})
