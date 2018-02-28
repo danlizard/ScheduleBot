@@ -22,6 +22,8 @@ def handle_message(message, nickname="user"):
 			answer = ['Please input your grade number.']
 	elif mtxt[0].rstrip().lower() == "help" or mtxt[0].rstrip()[1:] == "help":
 		answer = ["You may send a day's name to receive the schedule for that day or any other message to receive a schedule for today."]
+	elif mtxt[0].rstrip().lower() == "/state":
+		answer = ["On,", len(uscheck), "users."]
 	else:
 		for i in range(0, len(uscheck)):
 			if nickname.rstrip() == uscheck[i].rstrip():
@@ -30,6 +32,9 @@ def handle_message(message, nickname="user"):
 		grade = grades[usnumber].rstrip()
 		if mtxt[0].rstrip().lower() in Week:
 			day = mtxt[0].rstrip().lower()
+		elif mtxt[0].rstrip().lower() == "tomorrow":
+			daynmb = (date.today().weekday()+1) % 7
+			day = Week[daynmb]
 		else:
 			day = date.today().weekday()
 			day = Week[day]
