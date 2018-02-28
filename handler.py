@@ -20,6 +20,8 @@ def handle_message(message, nickname="user"):
 			
 		else:
 			answer = 'Please input your grade number.'
+	elif mtxt[0].rstrip().lower() == "help":
+		answer = "You may send a day's name to receive the schedule for that day or any other message to receive a schedule for today."
 	else:
 		for i in range(0, len(uscheck)):
 			if nickname.rstrip() == uscheck[i].rstrip():
