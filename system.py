@@ -1,7 +1,7 @@
 import requests 
 from handler import handle_message 
 token = "https://api.telegram.org/bot540889680:AAHVdAwR1JxSfJWP61-i0g1eVK-LoK9QfOU/"
-last_update = 584957547
+last_update = 561923494
 while True:
 	temp = dict()
 	temp["offset"] = last_update
