@@ -12,16 +12,16 @@ def handle_message(message, nickname="user"):
 	Week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 	print(nickname, uscheck)
 	if nickname not in uscheck:
-		if 3 > len(message) > 0 and "9" >= message >= "0":
-			with open("users.txt", 'a') as usernew:
-				print(nickname, file=usernew)		
-			with open("grades.txt", 'a') as gradenew:
-				print("\n".join(*mtxt), file=gradenew)
-			
+		if message.isnumeric():
+			if 11 >= int(message) >= 5:
+				with open("users.txt", 'a') as usernew:
+					print(nickname.rstrip(), file=usernew, sep='\n')		
+				with open("grades.txt", 'a') as gradenew:
+					print(*mtxt, file=gradenew, sep='\n')
 		else:
-			answer = 'Please input your grade number.'
-	elif mtxt[0].rstrip().lower() == "help":
-		answer = "You may send a day's name to receive the schedule for that day or any other message to receive a schedule for today."
+			answer = ['Please input your grade number.']
+	elif mtxt[0].rstrip().lower() == "help" or mtxt[0].rstrip()[1:] == "help":
+		answer = ["You may send a day's name to receive the schedule for that day or any other message to receive a schedule for today."]
 	else:
 		for i in range(0, len(uscheck)):
 			if nickname.rstrip() == uscheck[i].rstrip():
@@ -36,8 +36,10 @@ def handle_message(message, nickname="user"):
 		path = grade + '/' + day + '.txt'
 		schedule = open(path, 'r')
 		answer = schedule.readlines()
+		for st in range(len(answer)):
+			answer[st] = answer[st].rstrip()
 		if len(answer) == 0:
-			answer = "You either have no lessons today or we don't have information about them."
+			answer = ["You either have no lessons today or we don't have information about them."]
 		else:
 			print("40", answer)
 		schedule.close()
